@@ -97,13 +97,13 @@ Quando agisci come **agente AI per il progetto Rinnova**, segui le seguenti rego
 Il codice deve rispettare la seguente struttura:
 
 ```
-rinnova/
+docs/
 ├── index.html
 ├── assets/
 │   ├── css/style.css
 │   ├── js/main.js
 │   └── img/
-└── docs/
+└── documentation/
     └── SoftwareArchitecture.md
 ```
 
