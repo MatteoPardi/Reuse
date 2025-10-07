@@ -15,6 +15,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <header class="site-header">
+        <div class="container site-header__content">
+            <a class="site-header__brand" href="index.html">Rinnova</a>
+            <nav class="site-header__nav" aria-label="Navigazione principale">
+                <a href="index.html#upload-area">Genera annuncio</a>
+                <a href="ecommerce.html">E-commerce dedicato</a>
+                <a href="#integrazioni">Integrazioni marketplace</a>
+            </nav>
+        </div>
+    </header>
+
     <header class="hero">
         <div class="hero__overlay"></div>
         <div class="hero__content container">
@@ -109,7 +120,68 @@
             </div>
         </section>
 
-        <section class="section section--alt">
+        <section class="section" id="ecommerce-preview">
+            <div class="container grid grid--two-columns">
+                <div class="panel panel--info">
+                    <h2>Il tuo e-commerce proprietario, pronto da mostrare</h2>
+                    <p class="panel__subtitle">
+                        Accanto alla pubblicazione sui marketplace esterni, Rinnova propone anche uno spazio di vendita
+                        proprietario dove catalogare gli annunci generati e guidare i clienti tra categorie e offerte.
+                    </p>
+                    <ul class="checklist">
+                        <li>Catalogo suddiviso per categorie con filtri rapidi.</li>
+                        <li>Schede prodotto complete di valutazione, stato e call-to-action.</li>
+                        <li>Link diretti a marketplace esterni per pubblicare in un clic.</li>
+                    </ul>
+                    <div class="panel__actions">
+                        <a class="button" href="ecommerce.html">Apri mockup e-commerce</a>
+                        <a class="button button--ghost" href="#integrazioni">Scopri le integrazioni</a>
+                    </div>
+                </div>
+
+                <div class="panel panel--store-preview" aria-hidden="true">
+                    <div class="store-preview__header">
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                    <div class="store-preview__body">
+                        <article class="product-card">
+                            <p class="product-card__category">Moda vintage</p>
+                            <h3>Borsa pelle rigenerata</h3>
+                            <p class="product-card__price">€ 48</p>
+                            <p class="product-card__description">Stato ottimo, tracolla regolabile, lucidatura professionale.</p>
+                            <div class="product-card__tags">
+                                <span>Pronto alla spedizione</span>
+                                <span>Descrizione IA</span>
+                            </div>
+                        </article>
+                        <article class="product-card">
+                            <p class="product-card__category">Tech ricondizionato</p>
+                            <h3>Tablet 10" con cover</h3>
+                            <p class="product-card__price">€ 129</p>
+                            <p class="product-card__description">Batteria al 90%, caricatore incluso, garanzia 12 mesi.</p>
+                            <div class="product-card__tags">
+                                <span>Pubblicato su eBay</span>
+                                <span>Checklist qualità</span>
+                            </div>
+                        </article>
+                        <article class="product-card">
+                            <p class="product-card__category">Casa &amp; design</p>
+                            <h3>Sedia mid-century</h3>
+                            <p class="product-card__price">€ 210</p>
+                            <p class="product-card__description">Legno restaurato, imbottitura nuova, pezzo unico 1968.</p>
+                            <div class="product-card__tags">
+                                <span>In evidenza</span>
+                                <span>Link Vinted</span>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section--alt" id="integrazioni">
             <div class="container grid grid--features">
                 <article class="feature">
                     <h3>Trasparente per il team</h3>
@@ -134,6 +206,8 @@
                 <a href="documentation/SoftwareArchitecture.md">Documentazione</a>
                 <span aria-hidden="true">·</span>
                 <a href="#upload-area">Torna al form</a>
+                <span aria-hidden="true">·</span>
+                <a href="ecommerce.html">Vai all'e-commerce</a>
             </p>
         </div>
     </footer>
