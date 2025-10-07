@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoCap Rinnova – Valuta e racconta i tuoi oggetti</title>
+    <!--
+        Pagina principale del mockup frontend.
+        Strutturata per essere facilmente integrabile con backend/API futuri.
+        Tutto lo stile è gestito in assets/css/style.css, la logica in assets/js/main.js.
+    -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="hero">
+        <div class="hero__overlay"></div>
+        <div class="hero__content container">
+            <div>
+                <p class="hero__eyebrow">Demo MoCap · Rinnova</p>
+                <h1>Trasforma una foto in un annuncio pronto per la vendita</h1>
+                <p class="hero__subtitle">
+                    Carica l'oggetto, aggiungi qualche dettaglio facoltativo e lascia che l'IA faccia il resto:
+                    classificazione, valutazione economica e descrizione persuasiva.
+                </p>
+                <div class="hero__cta">
+                    <a class="button button--light" href="#upload-area">Inizia ora</a>
+                    <button class="button button--ghost" type="button" id="tour-button">Scopri il flusso</button>
+                </div>
+            </div>
+            <div class="hero__card" aria-hidden="true">
+                <div class="hero__card-header">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+                <div class="hero__card-body">
+                    <p class="hero__step"><span>1</span> Upload foto</p>
+                    <p class="hero__step"><span>2</span> Analisi IA</p>
+                    <p class="hero__step"><span>3</span> Annuncio pronto</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="section" id="upload-area">
+            <div class="container grid">
+                <div class="panel panel--form">
+                    <h2>Carica il tuo oggetto</h2>
+                    <p class="panel__subtitle">Almeno una foto è obbligatoria; la descrizione è opzionale.</p>
+                    <form id="object-form" novalidate>
+                        <div class="form-group">
+                            <label for="photos">Foto dell'oggetto <span class="required">*</span></label>
+                            <div class="dropzone" id="dropzone" tabindex="0">
+                                <p>Trascina qui una o più immagini oppure <span class="highlight">selezionale</span></p>
+                                <input type="file" id="photos" name="photos" accept="image/*" multiple required>
+                            </div>
+                            <p class="form-hint">Formato consigliato: JPG o PNG, max 10MB per immagine.</p>
+                            <ul id="preview-list" class="preview-list" aria-live="polite"></ul>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Descrizione opzionale</label>
+                            <textarea id="description" name="description" rows="4" placeholder="Es. Marca, anno, eventuali difetti o particolarità..."></textarea>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="button" id="analyze-button">Avvia analisi</button>
+                            <p class="form-legal">Nessun dato viene memorizzato: questa è una demo interattiva.</p>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="panel panel--status" aria-live="polite" aria-atomic="true">
+                    <h2>Cosa sta facendo l'IA</h2>
+                    <ol class="status-timeline" id="status-timeline">
+                        <li data-step="upload" class="is-pending">
+                            <strong>Verifica dei file caricati</strong>
+                            <p>L'IA controlla formato, qualità e numero di foto.</p>
+                        </li>
+                        <li data-step="recognition" class="is-pending">
+                            <strong>Riconoscimento dell'oggetto</strong>
+                            <p>Il modello vision classifica categoria, marca e stato.</p>
+                        </li>
+                        <li data-step="valuation" class="is-pending">
+                            <strong>Ricerca del valore di mercato</strong>
+                            <p>Interroga marketplace e banche dati per stimare il prezzo.</p>
+                        </li>
+                        <li data-step="copywriting" class="is-pending">
+                            <strong>Generazione dell'annuncio</strong>
+                            <p>L'LLM scrive titolo, descrizione e call-to-action.</p>
+                        </li>
+                    </ol>
+
+                    <div class="result-card is-hidden" id="result-card">
+                        <h3>Anteprima annuncio</h3>
+                        <p class="result-card__title" id="result-title">–</p>
+                        <p class="result-card__price" id="result-price">–</p>
+                        <p class="result-card__body" id="result-description">Carica un oggetto per generare l'annuncio.</p>
+                        <div class="result-card__cta">
+                            <button type="button" class="button button--ghost" id="download-button">Scarica bozza JSON</button>
+                            <button type="button" class="button button--light" id="share-button">Condividi via API (mock)</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section--alt">
+            <div class="container grid grid--features">
+                <article class="feature">
+                    <h3>Trasparente per il team</h3>
+                    <p>Ogni step è spiegato e tracciato così il cliente può capire cosa succede dietro le quinte.</p>
+                </article>
+                <article class="feature">
+                    <h3>Pronta per le API</h3>
+                    <p>Le funzioni JavaScript sono isolate: basta collegarle a un backend reale per andare live.</p>
+                </article>
+                <article class="feature">
+                    <h3>Usabile per chiunque</h3>
+                    <p>Form guidato, controlli lato client e suggerimenti aiutano anche gli utenti meno esperti.</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer__content">
+            <p><strong>Rinnova · MoCap</strong> — mockup frontend generato da AI per la fase di concept.</p>
+            <p class="footer__links">
+                <a href="docs/SoftwareArchitecture.md">Documentazione</a>
+                <span aria-hidden="true">·</span>
+                <a href="#upload-area">Torna al form</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
