@@ -1,4 +1,4 @@
-# Rinnova · Frontend Mockup MoCap
+# Rinnova · Frontend Mockup
 
 Questa pagina descrive l'architettura della prima bozza frontend di **Rinnova**, sviluppata come mock dimostrativo per illustrare al cliente il funzionamento del servizio.
 
