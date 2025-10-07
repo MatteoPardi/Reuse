@@ -5,6 +5,7 @@
  *  - Validazione e gestione dell'upload immagini
  *  - Simulazione delle fasi di analisi AI (mock)
  *  - Render della timeline e del risultato finale
+ *  - Gestione della selezione tra workflow annuncio ed e-commerce
  *
  * Ogni funzione è pensata per essere sostituita con chiamate API reali.
  * I commenti indicano i punti in cui agganciare il backend nelle fasi successive.
@@ -23,14 +24,19 @@ const analyzeButton = document.getElementById("analyze-button");
 const tourButton = document.getElementById("tour-button");
 const downloadButton = document.getElementById("download-button");
 const shareButton = document.getElementById("share-button");
+const viewPanels = document.querySelectorAll("[data-view-panel]");
+const viewSwitchTriggers = document.querySelectorAll("[data-switch-target]");
 
 let isProcessing = false;
+let activeView = null;
 
 /**
  * Utility per aggiornare la lista dei file selezionati.
  * Mostra nome file e dimensione approssimativa.
  */
 function renderPreviewList(files) {
+    if (!previewList) return;
+
     previewList.innerHTML = "";
     const fragment = document.createDocumentFragment();
 
@@ -49,7 +55,7 @@ function renderPreviewList(files) {
  * Ritorna un oggetto { isValid, message } per feedback futuri.
  */
 function validateForm() {
-    if (!photoInput.files || photoInput.files.length === 0) {
+    if (!photoInput || !photoInput.files || photoInput.files.length === 0) {
         return {
             isValid: false,
             message: "Carica almeno una foto per proseguire.",
@@ -64,6 +70,8 @@ function validateForm() {
  * Reset dei passi della timeline allo stato iniziale.
  */
 function resetTimeline() {
+    if (!statusTimeline) return;
+
     statusTimeline.querySelectorAll("li").forEach((item) => {
         item.classList.remove("is-active", "is-done");
         item.classList.add("is-pending");
@@ -74,6 +82,8 @@ function resetTimeline() {
  * Aggiorna visivamente lo stato della timeline.
  */
 function setTimelineStep(step, state) {
+    if (!statusTimeline) return;
+
     const item = statusTimeline.querySelector(`[data-step="${step}"]`);
     if (!item) return;
 
@@ -86,8 +96,8 @@ function setTimelineStep(step, state) {
  * In futuro questa funzione chiamerà un endpoint REST/GraphQL.
  */
 function buildMockResponse() {
-    const selectedFiles = Array.from(photoInput.files).map((file) => file.name);
-    const userDescription = descriptionInput.value.trim();
+    const selectedFiles = photoInput ? Array.from(photoInput.files).map((file) => file.name) : [];
+    const userDescription = descriptionInput ? descriptionInput.value.trim() : "";
 
     return {
         titolo: "Borsa vintage in pelle marrone",
@@ -105,6 +115,8 @@ function buildMockResponse() {
  * Mostra l'anteprima dell'annuncio generato.
  */
 function mostraRisultato(risultato) {
+    if (!resultCard || !resultTitle || !resultPrice || !resultDescription) return;
+
     resultCard.classList.remove("is-hidden");
     resultTitle.textContent = risultato.titolo;
     resultPrice.textContent = risultato.prezzoStimato;
@@ -143,7 +155,7 @@ function wait(duration) {
  */
 async function handleFormSubmit(event) {
     event.preventDefault();
-    if (isProcessing) return;
+    if (isProcessing || !analyzeButton) return;
 
     const validation = validateForm();
     if (!validation.isValid) {
@@ -161,7 +173,9 @@ async function handleFormSubmit(event) {
     analyzeButton.textContent = "Analisi in corso…";
 
     resetTimeline();
-    resultCard.classList.add("is-hidden");
+    if (resultCard) {
+        resultCard.classList.add("is-hidden");
+    }
 
     await analizzaMock();
 
@@ -174,6 +188,7 @@ async function handleFormSubmit(event) {
  * Esporta il risultato simulato come file JSON (download manuale).
  */
 function handleDownload() {
+    if (!resultCard) return;
     const content = resultCard.dataset.result;
     if (!content) return;
 
@@ -213,26 +228,158 @@ function handleTour() {
 }
 
 /**
- * Inizializzazione degli event listener.
+ * Determina quale vista mostrare al caricamento della pagina.
+ */
+function determineInitialView() {
+    const params = new URLSearchParams(window.location.search);
+    const queryView = params.get("view");
+    if (queryView === "ecommerce" || queryView === "workflow") {
+        return queryView;
+    }
+
+    const hash = window.location.hash.replace("#", "");
+    if (["ecommerce", "ecommerce-view", "ecommerce-intro", "ecommerce-catalogue"].includes(hash)) {
+        return "ecommerce";
+    }
+
+    return "workflow";
+}
+
+/**
+ * Attiva la vista selezionata mostrando il pannello corretto
+ * e aggiornando lo stato visivo dei trigger.
+ */
+function activateView(view) {
+    if (!viewPanels.length) return;
+
+    const previousView = activeView;
+    activeView = view;
+
+    viewPanels.forEach((panel) => {
+        const isTarget = panel.dataset.viewPanel === view;
+        panel.classList.toggle("is-active", isTarget);
+        if (isTarget) {
+            panel.removeAttribute("hidden");
+        } else {
+            panel.setAttribute("hidden", "");
+        }
+    });
+
+    viewSwitchTriggers.forEach((trigger) => {
+        const isTarget = trigger.dataset.switchTarget === view;
+
+        if (trigger.classList.contains("view-switcher__button")) {
+            trigger.classList.toggle("is-active", isTarget);
+        }
+
+        if (trigger.closest(".site-header__nav")) {
+            const shouldHighlight = trigger.dataset.viewRole === "primary";
+            trigger.removeAttribute("aria-current");
+            trigger.classList.toggle("is-active", shouldHighlight && isTarget);
+            if (shouldHighlight && isTarget) {
+                trigger.setAttribute("aria-current", "page");
+            }
+        }
+    });
+
+    if (view === "ecommerce" && previousView !== "ecommerce" && window.RinnovaStore && typeof window.RinnovaStore.resetFilters === "function") {
+        window.RinnovaStore.resetFilters();
+    }
+}
+
+/**
+ * Aggiorna la URL mantenendo allineato il parametro di vista e l'ancora.
+ */
+function syncUrl(view, hash) {
+    const url = new URL(window.location);
+    url.searchParams.set("view", view);
+
+    if (typeof hash === "string") {
+        url.hash = hash ? `#${hash}` : "";
+    }
+
+    history.replaceState(null, "", url.toString());
+}
+
+/**
+ * Gestisce il click sui trigger di cambio vista.
+ */
+function handleViewSwitch(event) {
+    const trigger = event.currentTarget;
+    const targetView = trigger.dataset.switchTarget;
+    if (!targetView) return;
+
+    event.preventDefault();
+    activateView(targetView);
+
+    const scrollTargetId = trigger.dataset.scrollTarget;
+    syncUrl(targetView, typeof scrollTargetId === "string" ? scrollTargetId : undefined);
+
+    if (scrollTargetId) {
+        const element = document.getElementById(scrollTargetId);
+        if (element) {
+            element.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+    } else {
+        const panel = document.querySelector(`[data-view-panel="${targetView}"]`);
+        if (panel) {
+            panel.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+    }
+}
+
+/**
+ * Inizializza gli event listener per la selezione vista.
+ */
+function setupViewSwitching() {
+    if (!viewPanels.length) return;
+
+    const initialView = determineInitialView();
+    activateView(initialView);
+    syncUrl(initialView);
+
+    viewSwitchTriggers.forEach((trigger) => {
+        trigger.addEventListener("click", handleViewSwitch);
+    });
+}
+
+/**
+ * Inizializzazione degli event listener del workflow mock.
  */
 function init() {
+    setupViewSwitching();
+
+    if (!form || !photoInput || !statusTimeline || !resultCard || !analyzeButton) {
+        return;
+    }
+
     form.addEventListener("submit", handleFormSubmit);
+
     photoInput.addEventListener("change", (event) => {
         renderPreviewList(event.target.files);
     });
 
-    downloadButton.addEventListener("click", handleDownload);
-    shareButton.addEventListener("click", handleShare);
-    tourButton.addEventListener("click", handleTour);
+    if (downloadButton) {
+        downloadButton.addEventListener("click", handleDownload);
+    }
 
-    // Accessibilità: permette il dropzone focus/enter
+    if (shareButton) {
+        shareButton.addEventListener("click", handleShare);
+    }
+
+    if (tourButton) {
+        tourButton.addEventListener("click", handleTour);
+    }
+
     const dropzone = document.getElementById("dropzone");
-    dropzone.addEventListener("keydown", (event) => {
-        if (event.key === "Enter" || event.key === " ") {
-            event.preventDefault();
-            photoInput.click();
-        }
-    });
+    if (dropzone) {
+        dropzone.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                photoInput.click();
+            }
+        });
+    }
 }
 
 init();

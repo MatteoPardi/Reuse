@@ -14,8 +14,13 @@ const summaryElement = document.getElementById('catalogue-summary');
  * Aggiorna lo stato attivo dei pulsanti filtro per fornire feedback visivo.
  */
 function setActiveFilter(button) {
-    filterButtons.forEach((btn) => btn.classList.remove('is-active'));
+    filterButtons.forEach((btn) => {
+        btn.classList.remove('is-active');
+        btn.setAttribute('aria-pressed', 'false');
+    });
+
     button.classList.add('is-active');
+    button.setAttribute('aria-pressed', 'true');
 }
 
 /**
@@ -68,6 +73,17 @@ function handleFilterClick(event) {
 }
 
 /**
+ * Ripristina lo stato iniziale dei filtri.
+ */
+function resetFilters() {
+    const defaultButton = document.querySelector('.filter-button[data-filter="all"]');
+    if (!defaultButton) return;
+
+    setActiveFilter(defaultButton);
+    applyFilter('all');
+}
+
+/**
  * Inizializza gli event listener della pagina store.
  */
 function initStore() {
@@ -80,7 +96,11 @@ function initStore() {
     });
 
     // Imposta lo stato iniziale mostrando tutte le categorie.
-    applyFilter('all');
+    resetFilters();
 }
 
 initStore();
+
+// Espone una funzione di utilità per ripristinare i filtri quando la vista viene riattivata.
+window.RinnovaStore = window.RinnovaStore || {};
+window.RinnovaStore.resetFilters = resetFilters;

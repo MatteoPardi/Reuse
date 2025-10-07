@@ -2,177 +2,27 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="0; url=index.html?view=ecommerce#ecommerce-intro">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rinnova · Mockup E-commerce dedicato</title>
     <!--
-        Pagina mockup dedicata alla vetrina e-commerce proprietaria.
-        Riutilizza gli stili principali e introduce componenti per filtri e schede prodotto.
-        Pensata per mostrare come gli annunci generati possano essere raccolti in un catalogo navigabile.
+        Pagina mantenuta per compatibilità: reindirizza alla nuova vista e-commerce
+        integrata nella landing page principale.
     -->
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <main>
-        <section class="hero hero--subpage">
-            <div class="hero__overlay"></div>
-            <div class="hero__content container">
-                <div>
-                    <p class="hero__eyebrow">Catalogo proprietario</p>
-                    <h1>Organizza gli annunci generati in uno store intuitivo</h1>
-                    <p class="hero__subtitle">
-                        Questa anteprima mostra come gli oggetti valutati dall'IA possano essere raccolti in un e-commerce
-                        minimale ma completo: categorie, filtri rapidi, call-to-action verso marketplace esterni e schede di
-                        prodotto pronte per la vendita.
-                    </p>
-                    <div class="hero__cta">
-                        <a class="button button--light" href="#catalogo">Esplora il catalogo</a>
-                        <a class="button button--ghost" href="index.html#upload-area">Genera un nuovo annuncio</a>
-                    </div>
-                </div>
-                <div class="hero__card" aria-hidden="true">
-                    <div class="hero__card-header">
-                        <span class="dot"></span>
-                        <span class="dot"></span>
-                        <span class="dot"></span>
-                    </div>
-                    <div class="hero__card-body">
-                        <p class="hero__step"><span>1</span> Carica e analizza</p>
-                        <p class="hero__step"><span>2</span> Pubblica su marketplace</p>
-                        <p class="hero__step"><span>3</span> Metti in vetrina qui</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section" id="catalogo">
-            <div class="container grid grid--two-columns">
-                <aside class="panel panel--filters" aria-label="Filtri catalogo">
-                    <h2>Filtra per categoria</h2>
-                    <p class="panel__subtitle">Seleziona una categoria per simulare il comportamento dei filtri lato utente.</p>
-                    <div class="filter-buttons" role="group" aria-label="Seleziona categoria">
-                        <button class="filter-button is-active" type="button" data-filter="all">Tutte</button>
-                        <button class="filter-button" type="button" data-filter="moda">Moda e accessori</button>
-                        <button class="filter-button" type="button" data-filter="tech">Tech ricondizionato</button>
-                        <button class="filter-button" type="button" data-filter="casa">Casa &amp; design</button>
-                        <button class="filter-button" type="button" data-filter="green">Upcycling &amp; materiali</button>
-                    </div>
-                    <div class="panel panel--mini">
-                        <h3>Mockup azioni gestore</h3>
-                        <ul class="checklist">
-                            <li>Attiva/disattiva visibilità per marketplace esterni.</li>
-                            <li>Segna oggetti come "In evidenza" o "Nuovo".</li>
-                            <li>Scarica report CSV delle performance (futuro).</li>
-                        </ul>
-                    </div>
-                </aside>
-
-                <div class="catalogue" aria-live="polite">
-                    <p class="catalogue__summary" id="catalogue-summary">4 prodotti disponibili</p>
-                    <article class="product-card" data-category="moda">
-                        <p class="product-card__category">Moda vintage</p>
-                        <h3>Borsa a spalla in pelle rigenerata</h3>
-                        <p class="product-card__price">€ 48</p>
-                        <p class="product-card__description">
-                            Analisi IA: stato molto buono, dettagli originali preservati, inclusa confezione antipolvere.
-                        </p>
-                        <ul class="product-card__meta">
-                            <li>Disponibile in negozio e su Vinted</li>
-                            <li>Ultimo restauro: marzo 2024</li>
-                        </ul>
-                        <div class="product-card__actions">
-                            <a class="button" href="#" aria-label="Anteprima annuncio borsa rigenerata">Anteprima annuncio</a>
-                            <a class="button button--ghost" href="#" aria-label="Pubblica su Vinted">Pubblica su Vinted</a>
-                        </div>
-                    </article>
-
-                    <article class="product-card" data-category="tech">
-                        <p class="product-card__category">Tech ricondizionato</p>
-                        <h3>Notebook 14" eco-upgrade</h3>
-                        <p class="product-card__price">€ 389</p>
-                        <p class="product-card__description">
-                            Processore quad-core, SSD 512GB nuovo, batteria sostituita. Garanzia laboratorio 12 mesi.
-                        </p>
-                        <ul class="product-card__meta">
-                            <li>Disponibile su eBay e Subito</li>
-                            <li>Rating qualità: 4.7/5</li>
-                        </ul>
-                        <div class="product-card__actions">
-                            <a class="button" href="#" aria-label="Anteprima annuncio notebook">Anteprima annuncio</a>
-                            <a class="button button--ghost" href="#" aria-label="Pubblica su eBay">Pubblica su eBay</a>
-                        </div>
-                    </article>
-
-                    <article class="product-card" data-category="casa">
-                        <p class="product-card__category">Casa &amp; design</p>
-                        <h3>Lampada da tavolo anni '70</h3>
-                        <p class="product-card__price">€ 95</p>
-                        <p class="product-card__description">
-                            Struttura in ottone lucidato, impianto elettrico certificato, diffusore in vetro satinato.
-                        </p>
-                        <ul class="product-card__meta">
-                            <li>Solo ritiro in sede o spedizione assicurata</li>
-                            <li>In evidenza nella home</li>
-                        </ul>
-                        <div class="product-card__actions">
-                            <a class="button" href="#" aria-label="Anteprima annuncio lampada">Anteprima annuncio</a>
-                            <a class="button button--ghost" href="#" aria-label="Pubblica su Subito">Pubblica su Subito</a>
-                        </div>
-                    </article>
-
-                    <article class="product-card" data-category="green">
-                        <p class="product-card__category">Upcycling creativo</p>
-                        <h3>Set tavolini pallet industrial</h3>
-                        <p class="product-card__price">€ 180</p>
-                        <p class="product-card__description">
-                            Realizzati con pallet recuperati, trattamento antitarlo, superficie resinata effetto satinato.
-                        </p>
-                        <ul class="product-card__meta">
-                            <li>Kit di montaggio incluso</li>
-                            <li>Disponibilità limitata: 4 pezzi</li>
-                        </ul>
-                        <div class="product-card__actions">
-                            <a class="button" href="#" aria-label="Anteprima annuncio tavolini">Anteprima annuncio</a>
-                            <a class="button button--ghost" href="#" aria-label="Condividi catalogo">Condividi catalogo</a>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <section class="section section--alt">
-            <div class="container grid grid--features">
-                <article class="feature">
-                    <h3>Esperienza cliente chiara</h3>
-                    <p>Gallery leggibili, tag di stato e call-to-action pensati per guidare all'acquisto.</p>
-                </article>
-                <article class="feature">
-                    <h3>Gestione operatori</h3>
-                    <p>Ogni scheda mostra suggerimenti su dove pubblicare l'annuncio e lo stato dei controlli qualità.</p>
-                </article>
-                <article class="feature">
-                    <h3>Pronto per crescere</h3>
-                    <p>Struttura modulare: facile aggiungere carrello, login cliente o tracking ordini nelle fasi successive.</p>
-                </article>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <div class="container footer__content">
-            <p><strong>Rinnova · Mockup</strong> — sezione e-commerce proprietaria generata da AI.</p>
-            <p class="footer__links">
-                <a href="index.html#upload-area">Generatore annuncio</a>
-                <span aria-hidden="true">·</span>
-                <a href="index.html#integrazioni">Integrazioni marketplace</a>
-                <span aria-hidden="true">·</span>
-                <a href="documentation/SoftwareArchitecture.md">Documentazione</a>
+    <main class="section">
+        <div class="container">
+            <h1>Reindirizzamento alla vetrina e-commerce</h1>
+            <p>Stiamo caricando la nuova esperienza integrata. Se non vieni reindirizzato automaticamente, clicca il pulsante:</p>
+            <p>
+                <a class="button" href="index.html?view=ecommerce#ecommerce-intro">Apri l'e-commerce</a>
             </p>
         </div>
-    </footer>
-
-    <script src="assets/js/store.js"></script>
+    </main>
+    <script>
+        window.location.replace('index.html?view=ecommerce#ecommerce-intro');
+    </script>
 </body>
 </html>
