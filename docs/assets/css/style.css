@@ -205,8 +205,6 @@ img {
     align-items: flex-start;
     justify-content: space-between;
     padding: 32px;
-    padding-right: 56px;
-    padding-bottom: 56px;
     border-radius: var(--radius-large);
     border: 1px solid rgba(28, 77, 216, 0.12);
     background: linear-gradient(135deg, rgba(47, 139, 253, 0.08), rgba(0, 198, 174, 0.08));
@@ -225,14 +223,6 @@ img {
 .view-switcher__button .view-switcher__subtitle {
     font-weight: 400;
     color: var(--color-muted);
-}
-
-.view-switcher__icon {
-    position: absolute;
-    bottom: 24px;
-    right: 24px;
-    font-size: 1.5rem;
-    color: var(--color-primary-dark);
 }
 
 .view-switcher__button:hover,
