@@ -11,13 +11,13 @@ Questa pagina descrive l'architettura della prima bozza frontend di **Rinnova**,
 ## Struttura delle cartelle
 
 ```
-rinnova/
+docs/
 ├── index.html
 ├── assets/
 │   ├── css/style.css
 │   ├── js/main.js
 │   └── img/ (segnaposto per future risorse)
-└── docs/
+└── documentation/
     └── SoftwareArchitecture.md
 ```
 
