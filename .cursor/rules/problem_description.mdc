@@ -1,0 +1,167 @@
+---
+description: Regola di contesto per Cursor AI dedicata al progetto "Rinnova" — un servizio web intelligente per analizzare, valutare e stimare il valore di oggetti usati tramite modelli AI multimodali. Fornisce a Cursor AI una visione chiara del team, del workflow, delle fasi di sviluppo e delle linee guida di interazione con l’assistente.
+globs:
+alwaysApply: true
+---
+
+# 🧭 Progetto "Rinnova"
+
+**Documento di contesto per interazione con AI assistant**  
+*(versione iniziale — destinata a essere usata come contesto base per ChatGPT, Claude, Cursor AI, Windsurf, ecc.)*
+
+---
+
+## 1. 📖 Chi siamo
+
+Siamo un piccolo team multidisciplinare di programmatori **non esperti**, ma con solide competenze analitiche e scientifiche.  
+Il gruppo è composto principalmente da:
+- Un **fisico e data scientist**, con esperienza nel trattamento e analisi dei dati;
+- Un **laureato in scienze naturali** con buona dimestichezza nella programmazione.
+
+Il linguaggio di programmazione principale utilizzato è **Python**.  
+Abbiamo solo conoscenze di base di **HTML, CSS e JavaScript** e poca esperienza nello sviluppo web.  
+Cerchiamo quindi il supporto dell’AI per tutte le fasi che vanno dalla progettazione software fino alla scrittura del codice.
+
+---
+
+## 2. 💡 Visione e obiettivo generale
+
+**Rinnova** è un progetto orientato a creare un **servizio web intelligente** dedicato all’analisi, valutazione e potenziale valorizzazione di **oggetti di seconda mano, usati o di scarto**.  
+
+Il sito web dovrà offrire una pipeline che permetta a un utente di:
+1. Caricare una o più **foto** (o eventualmente files) di un oggetto;
+2. Opzionalmente, inserire una **descrizione testuale** che lo accompagna;
+3. Far sì che un modello di **intelligenza artificiale (LLM + Vision model)**:
+   - Identifichi che oggetto è;
+   - Valuti lo stato di conservazione (condizioni, usura, eventuali difetti visibili);
+   - Stimi un **valore di mercato** (utilizzando conoscenza interna, API di marketplace come eBay/Vinted/Subito, o web search);
+   - Generi un **annuncio descrittivo di vendita o valutazione** (a seconda dello scopo dell'utente/cliente), con titolo, descrizione, motivazione del valore e appeal per un potenziale acquirente.
+
+Il risultato finale è un **annuncio simulato o reale**, utile per:
+- Privati che vogliono rivendere oggetti usati;
+- Aziende o negozi di **antiquariato**, **mercatini dell’usato**, **discariche intelligenti**, o servizi di **recupero e riuso**.
+
+L'output esatto dovrà essere definito insieme al cliente finale, in base alle sue esigenze.
+
+L’obiettivo a lungo termine è offrire un **servizio modulare**, adattabile a contesti diversi:  
+- Stima del valore commerciale;  
+- Analisi dello stato fisico e funzionale di un oggetto;  
+- Supporto decisionale per la gestione di oggetti dismessi.
+
+---
+
+## 3. 🧱 Obiettivi di sviluppo
+
+Il progetto si sviluppa in **tre fasi incrementali**:
+
+### **Fase 1 — Front-end mockup**
+- Creazione di un **sito web statico** (prototipo UI/UX).
+- Interfaccia semplice, chiara e minimalista, **user-friendly**, **catchy**.
+- Obiettivo: mostrare al cliente la possibile esperienza utente e ricevere feedback.
+
+### **Fase 2 — Backend prototipale**
+- Collegamento del front-end a un backend Python funzionante ma non ottimizzato.
+- Integrazione iniziale con **API di AI generativa** e/o modelli locali.
+- Test della pipeline logica: input → analisi → output simulato.
+
+### **Fase 3 — Backend completo e deploy**
+- Ottimizzazione architetturale del backend.
+- Integrazione con **database utenti**, **gestione login/registrazione**, **permessi e ruoli**.
+- Deploy in ambiente di produzione (ad esempio su **GitHub Pages + backend Python**, oppure **framework web** come Flask/FastAPI o simili).
+
+---
+
+## 4. 🧩 Architettura software (visione generale)
+
+Il sistema dovrà essere strutturato in modo modulare, comprendendo:
+- **Frontend**: interfaccia web per caricamento immagini e testo, visualizzazione dei risultati;
+- **Backend AI**: orchestrazione della pipeline di analisi e valutazione (gestione LLM e Vision model);
+- **Database**: gestione utenti, cronologia delle analisi, eventuale storage dei risultati;
+- **Integration layer**: collegamento con API esterne (eBay, Vinted, Subito, Google Lens, ecc.);
+- **Logging e tracciabilità**: per debug e miglioramento del sistema.
+
+---
+
+## 5. 🧠 Collaborazione con l’intelligenza artificiale
+
+Il progetto **Rinnova** è pensato per essere sviluppato **in stretta collaborazione con intelligenze artificiali conversazionali e di coding assistito**, tra cui:
+- **ChatGPT**, **Claude**, **Cursor AI**, **Windsurf**, ecc.
+
+### **Metodo di lavoro con AI**
+1. L’AI fungerà da **assistente tecnico e architetto software**, aiutando a:
+   - Definire la struttura del progetto;
+   - Selezionare soluzioni semplici e robuste;
+   - Suggerire librerie, framework e buone pratiche;
+   - Generare codice e commentarlo passo-passo.
+2. L’AI dovrà **adattare il livello di complessità** al grado di competenza del team, privilegiando soluzioni:
+   - Semplici e mantenibili;
+   - Supportate da ampia documentazione;
+   - Facili da integrare.
+
+### **Ruolo atteso dell’AI**
+- Fare domande chiarificatrici prima di proporre soluzioni;
+- Proporre alternative con spiegazione pro/contro;
+- Suggerire come organizzare il codice e i file GitHub;
+- Aiutare nella scrittura di prompt tecnici e nella documentazione automatica.
+- Scrittura del codice.
+
+---
+
+## 6. 🧭 Guideline per le AI che assisteranno il progetto
+
+Quando interagisci come AI assistente di sviluppo:
+
+- Considera che **il team non è composto da programmatori esperti**;
+- Privilegia la **chiarezza e la didattica** rispetto all’ottimizzazione;
+- Mantieni un tono **tecnico ma accessibile**;
+- Evita acronimi o termini complessi non spiegati;
+- Spiega sempre **il perché** di una scelta architetturale o tecnica;
+- Suggerisci **soluzioni incrementali**, da semplici a più complesse;
+- Assicurati che ogni blocco di codice generato sia **autosufficiente e commentato**.
+
+---
+
+## 7. 📅 Roadmap sintetica
+
+| Fase | Obiettivo | Output previsto |
+|------|------------|-----------------|
+| 1️⃣ | Mockup UI/UX | Frontend statico navigabile |
+| 2️⃣ | Backend prototipale | Pipeline AI simulata |
+| 3️⃣ | Backend completo + deploy | Sistema integrato pronto all’uso |
+
+---
+
+## 8. 🧰 Stack tecnico (indicativo, non vincolante)
+
+| Ambito | Possibili tecnologie |
+|--------|----------------------|
+| Linguaggio principale | Python |
+| Framework web | Flask, FastAPI |
+| Frontend | HTML, CSS, JS (semplice, eventualmente con AI support) |
+| Database | SQLite / PostgreSQL (seconda fase) |
+| Integrazioni | API eBay, Vinted, Subito, web scraping |
+| AI | LLM (GPT, Claude), modelli Vision, API AI multimodali |
+| Hosting | GitHub + Render / HuggingFace Spaces (da valutare) |
+
+---
+
+## 9. 🌍 Clienti e scenari di utilizzo
+
+Il sistema potrà essere adattato a diversi tipi di utenti:
+- Privati cittadini che vogliono stimare o vendere oggetti usati;
+- Antiquari e rigattieri che gestiscono beni di valore variabile;
+- Aziende o enti ambientali che valutano il riuso o smaltimento di materiali;
+- Centri di raccolta e discariche che vogliono classificare e valorizzare scarti.
+
+In tutti i casi, il workflow iniziale (identificazione, valutazione, descrizione) resta comune.
+
+---
+
+## 10. 🧭 Sommario esecutivo
+
+**Rinnova** è un progetto di sviluppo software assistito da AI, nato per creare un servizio web capace di riconoscere e valutare automaticamente oggetti usati.  
+Il team, composto da due sviluppatori non professionisti, lavora in collaborazione costante con intelligenze artificiali per:
+- Progettare un’architettura software chiara e scalabile;  
+- Costruire un sito web funzionale e minimalista;  
+- Integrare pipeline di analisi basate su modelli AI multimodali;  
+- Fornire uno strumento utile nel mercato della seconda mano e del riutilizzo.

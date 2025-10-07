@@ -1,0 +1,154 @@
+---
+description: Regola architetturale per il progetto "Rinnova" — Fase 1 (Frontend Statico). Fornisce a Cursor AI linee guida chiare per generare, validare e mantenere codice HTML, CSS e JavaScript coerente con la struttura modulare del progetto. Definisce principi di semplicità, separazione logica e preparazione all’integrazione futura con un backend Python + AI.
+globs:
+alwaysApply: true
+---
+
+# 🧭 Software Architecture
+**Prompt architetturale per il progetto “Rinnova” — Fase 1 (Frontend Statico)**
+
+---
+
+## 🎯 Scopo
+
+Definire la **struttura software** del progetto nella sua **prima fase di sviluppo**, dedicata esclusivamente alla costruzione del **frontend statico** (mockup funzionale).  
+Questo documento descrive la visione architetturale in termini **adattivi**, fornendo indicazioni ad alto, medio e basso livello utili ad agenti AI e sviluppatori umani per mantenere coerenza e estensibilità del progetto.
+
+---
+
+## 🧱 Architettura generale (alto livello)
+
+### Visione
+L’architettura è concepita come una **struttura modulare a crescita progressiva**, in cui il **frontend statico** costituisce il primo strato di un sistema più ampio che includerà in futuro componenti di backend e integrazioni AI.
+
+```
+
+[Utente]
+↓
+[Frontend statico (HTML/CSS/JS)]
+↓
+[Mock layer simulativo]
+↓
+[Backend futuro: API Python + AI]
+↓
+[Database e integrazioni esterne]
+
+```
+
+### Obiettivo della Fase 1
+Costruire un **prototipo interattivo ma puramente statico**, capace di rappresentare:
+- L’esperienza utente (UI/UX);
+- Il flusso logico base (caricamento immagine, input testo, risultato mock);
+- La separazione tra componenti logici, strutturali e visivi.
+
+Il sistema deve poter essere **esteso alla Fase 2** senza riscrivere da zero.
+
+---
+
+## ⚙️ Struttura logica (medio livello)
+
+### Organizzazione dei moduli
+Il codice è suddiviso in tre domini principali:
+
+| Dominio | Descrizione | Estensibilità |
+|----------|--------------|----------------|
+| **HTML (presentazione)** | Definisce la struttura semantica delle pagine | Rimane stabile tra le fasi |
+| **CSS (stile)** | Gestisce layout e design, preferibilmente modulare | Può essere sostituito o integrato (es. Tailwind, Bootstrap) |
+| **JS (logica UI)** | Gestisce eventi, mock di AI, e flusso interattivo | Sarà collegato alle API reali nella Fase 2 |
+
+Struttura raccomandata:
+
+```
+
+rinnova/
+├── index.html
+├── assets/
+│   ├── css/style.css
+│   ├── js/main.js
+│   └── img/
+└── docs/SoftwareArchitecture.mv
+
+````
+
+### Ruolo dei componenti
+- `index.html`  
+  Contiene l’interfaccia principale: form di caricamento, testo descrittivo, pulsante “Analizza”, e sezione risultati.
+
+- `main.js`  
+  Contiene funzioni che gestiscono l’interazione e producono un **mock di risposta**, in attesa del backend reale.  
+  Le funzioni dovranno mantenere nomi e strutture tali da poter essere poi collegate a chiamate `fetch()` o API reali.
+
+- `style.css`  
+  Definisce il layout base. Può essere sostituito da un framework o personalizzato da agenti senza modificare la semantica HTML.
+
+---
+
+## 🔧 Linee guida tecniche (basso livello)
+
+Le seguenti indicazioni servono come **linee guida** per gli agenti e sviluppatori; non sono vincoli rigidi, ma riferimenti di coerenza:
+
+### HTML
+- Usare una struttura semantica con blocchi principali: header, main, footer.
+- Includere un’area risultati (`<div id="risultato">`) per simulazioni.
+- Commentare chiaramente sezioni e ruoli funzionali.
+
+### CSS
+- Preferire layout con **Flexbox** o **Grid**.  
+- Evitare complessità visive: interfaccia chiara e leggera.  
+- Strutturare le classi in modo che possano essere facilmente sostituite da un framework.
+
+### JavaScript
+- Scrivere funzioni pure, modulari e ben nominate.
+- Usare un **mock layer** che simuli le risposte AI:
+
+  ```js
+  async function analizzaMock() {
+      const risultato = {
+          oggetto: "Borsa in pelle",
+          condizione: "Buona",
+          valore: "€45"
+      };
+      mostraRisultato(risultato);
+  }
+  ```
+
+* Evitare librerie complesse. Usare JS nativo o minime dipendenze.
+* Organizzare il codice in modo che la funzione di mock possa essere facilmente sostituita da chiamate a `/api/analyze` in Fase 2.
+
+### Deployment
+
+* Il frontend deve essere compatibile con **GitHub Pages** o qualsiasi hosting statico.
+* Tutti i file devono poter essere serviti da un semplice server HTTP.
+
+---
+
+## 🧠 Linee guida per agenti AI
+
+> **Ruolo:** agisci come architetto o sviluppatore AI per il progetto *Rinnova (Fase 1)*.
+> **Obiettivo:** genera, verifica o migliora il codice in conformità ai principi di questa architettura.
+> **Istruzioni operative:**
+>
+> 1. Mantieni separati struttura (HTML), stile (CSS) e logica (JS).
+> 2. Prediligi chiarezza, leggibilità e semplicità.
+> 3. Genera codice facilmente sostituibile o estendibile nella Fase 2.
+> 4. Evita qualsiasi vincolo tecnologico non necessario.
+> 5. Documenta in commenti le scelte architetturali e i punti di estensione futuri.
+> 6. Se mancano specifiche, scegli la soluzione più **comprensibile** per un team non esperto.
+> 7. Rispetta la filosofia: *mock oggi, integrazione domani*.
+
+---
+
+## 🧩 Evoluzione architetturale prevista
+
+| Fase | Estensione prevista            | Output                                        |
+| ---- | ------------------------------ | --------------------------------------------- |
+| 1️⃣  | Frontend statico con mock      | Pagina HTML interattiva locale / GitHub Pages |
+| 2️⃣  | Backend Python (Flask/FastAPI) | API funzionante collegata al frontend         |
+| 3️⃣  | Sistema completo               | Backend ottimizzato, database, deploy         |
+
+---
+
+## 🪶 Nota finale
+
+Questa architettura rappresenta il **cuore strutturale del progetto Rinnova**:
+semplice da comprendere, chiara da estendere, e sufficientemente flessibile perché gli agenti AI possano adattarla a evoluzioni future senza frammentarla.
