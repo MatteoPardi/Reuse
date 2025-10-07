@@ -194,7 +194,7 @@ function handleDownload() {
  */
 function handleShare() {
     const marketplaces = ["eBay", "Vinted", "Subito"];
-    const message = `Mock inviato a: ${marketplaces.join(", ")}.\nQuesta funzione chiamerà le API reali nella fase 2.`;
+    const message = `Mock inviato a: ${marketplaces.join(", ")}.\nL'annuncio viene anche aggiunto alla vetrina e-commerce proprietaria.\nQuesta funzione chiamerà le API reali nella fase 2.`;
     alert(message);
 }
 
